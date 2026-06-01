@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Meeting {
+  id              String   @id @default(cuid())
+  title           String
+  date            DateTime @default(now())
+  duration        Int      @default(0)
+  status          String   @default("recording") // recording, completed
+  transcript      String   @default("")
+  momContent      String?  // Full MOM as JSON string
+  hostName        String   @default("")
+  meetingLink     String?  // Zoom/Meet/Teams link
+  
+  // MOM structured fields
+  executiveSummary String?
+  nextMeetingDate  String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  participants Participant[]
+  actionItems  ActionItem[]
+  decisions    Decision[]
+  topics       Topic[]
+}
+
+model Participant {
+  id        String  @id @default(cuid())
+  name      String
+  role      String?
+  meetingId String
+  meeting   Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}
+
+model ActionItem {
+  id          String   @id @default(cuid())
+  task        String
+  assignee    String?
+  priority    String   @default("Medium")
+  dueDate     String?
+  status      String   @default("Pending")
+  meetingId   String
+  meeting     Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}
+
+model Decision {
+  id          String  @id @default(cuid())
+  description String
+  decidedBy   String?
+  meetingId   String
+  meeting     Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}
+
+model Topic {
+  id          String  @id @default(cuid())
+  name        String
+  summary     String?
+  meetingId   String
+  meeting     Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+}
