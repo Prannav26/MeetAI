@@ -44,7 +44,7 @@ MeetAI is a full-stack web application that automates the generation of structur
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Prannav26/meetai.git
+git clone https://github.com/Prannav26/MeetAI.git
 cd MeetAI
 ```
 
