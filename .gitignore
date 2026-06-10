@@ -52,3 +52,11 @@ prompt
 server.log
 # Skills directory
 /skills/
+
+node_modules/
+.next/
+.env
+.env.local
+*.log
+.DS_Store
+.vercel/
