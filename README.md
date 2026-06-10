@@ -33,42 +33,36 @@ MeetAI is a full-stack web application that automates the generation of structur
 
 ## Prerequisites
 
-- **Node.js** 18.x or later
-- **npm** or **yarn**
-- **PostgreSQL** database (local or cloud — Neon recommended)
+- **Bun** (recommended) or Node.js 18.x+
 - **OpenAI API key** (for AI-powered MOM generation)
-- A modern browser that supports the **Web Speech API** (Chrome, Edge, or Safari)
+- A modern browser that supports the **Web Speech API** (Chrome or Edge recommended)
+
 
 ---
 
 ## Getting Started
-
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Prannav26/MeetAI.git
+git clone https://github.com/YOUR-USERNAME/meetai.git
 cd meetai
 ```
 
 ### 2. Install Dependencies
 
 ```bash
-npm install
+bun install
 ```
+
+> If you prefer npm, you can use `npm install` instead.
 
 ### 3. Set Up Environment Variables
 
-Copy the example environment file and fill in your values:
-
-```bash
-cp .env.example .env
-```
-
-Open `.env` and configure:
+Create a `.env` file in the project root and add:
 
 ```env
-# Database
-DATABASE_URL="postgresql://user:password@host:5432/meetai?sslmode=require"
+# Database (SQLite — file is auto-created in db/custom.db)
+DATABASE_URL="file:./db/custom.db"
 
 # OpenAI
 OPENAI_API_KEY="sk-your-openai-api-key-here"
@@ -93,8 +87,14 @@ npx prisma generate
 
 ### 5. Start the Development Server
 
+Using Bun:
 ```bash
-npm run dev
+bun run dev
+```
+
+Or using the dev script:
+```bash
+bash .zscripts/dev.sh
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
